@@ -2,6 +2,7 @@ namespace PCLMock.CodeGeneration.Plugins
 {
     using System;
     using System.Collections.Immutable;
+    using System.Net.Http;
     using Logging;
     using Microsoft.CodeAnalysis;
 
@@ -36,6 +37,10 @@ namespace PCLMock.CodeGeneration.Plugins
 
         /// <inheritdoc />
         public Compilation InitializeCompilation(Compilation compilation) =>
+//            compilation
+//                .AddReferences(
+//                    MetadataReference.CreateFromFile(typeof(IImmutableList<>).Assembly.Location),
+//                    MetadataReference.CreateFromFile(typeof(HttpResponseMessage).Assembly.Location));
             compilation
                 .AddReferences(
                     MetadataReference.CreateFromFile(typeof(IImmutableList<>).Assembly.Location));
