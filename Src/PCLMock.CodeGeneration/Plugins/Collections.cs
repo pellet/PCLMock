@@ -1,6 +1,7 @@
 namespace PCLMock.CodeGeneration.Plugins
 {
     using System;
+    using System.Collections.Immutable;
     using Logging;
     using Microsoft.CodeAnalysis;
 
@@ -35,7 +36,9 @@ namespace PCLMock.CodeGeneration.Plugins
 
         /// <inheritdoc />
         public Compilation InitializeCompilation(Compilation compilation) =>
-            compilation;
+            compilation
+                .AddReferences(
+                    MetadataReference.CreateFromFile(typeof(IImmutableList<>).Assembly.Location));
 
         /// <inheritdoc />
         public SyntaxNode GetDefaultValueSyntax(
@@ -270,7 +273,7 @@ namespace PCLMock.CodeGeneration.Plugins
             var immutableListInterfaceType = context
                 .SemanticModel
                 .Compilation
-                .GetTypeByMetadataName("System.Collections.Immutable.IImmutableList`1");
+                .GetTypeByMetadataName("System.Collections.Immutable.IImmutableList");
 
             if (returnType.ConstructedFrom != immutableListInterfaceType)
             {
