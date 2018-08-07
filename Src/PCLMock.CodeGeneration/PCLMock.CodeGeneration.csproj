@@ -167,6 +167,7 @@
     <Compile Include="Context.cs" />
     <Compile Include="Plugins\Collections.cs" />
     <Compile Include="Plugins\Disposables.cs" />
+    <Compile Include="Plugins\Http.cs" />
     <Compile Include="Plugins\ObservableBasedAsynchrony.cs" />
     <Compile Include="Plugins\TaskBasedAsynchrony.cs" />
     <Compile Include="Extensions.cs" />
