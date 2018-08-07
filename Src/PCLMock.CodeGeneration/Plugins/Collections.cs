@@ -274,7 +274,7 @@ namespace PCLMock.CodeGeneration.Plugins
             var immutableListInterfaceType = context
                 .SemanticModel
                 .Compilation
-                .GetTypeByMetadataName("System.Collections.Immutable.IImmutableList");
+                .GetTypeByMetadataName("System.Collections.Immutable.IImmutableList`1");
 
             if (returnType.ConstructedFrom != immutableListInterfaceType)
             {
