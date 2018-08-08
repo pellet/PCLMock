@@ -4,8 +4,8 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Buildalyzer" />
-    <PackageReference Include="Buildalyzer.Workspaces" />
+    <PackageReference Include="Buildalyzer" Version="1.0.0" />
+    <PackageReference Include="Buildalyzer.Workspaces" Version="1.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.8.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="2.8.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.Features" Version="2.8.2" />
