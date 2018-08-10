@@ -37,6 +37,11 @@
         {
             var workspace = MSBuildWorkspace.Create();
             var solution = await workspace.OpenSolutionAsync(solutionPath);
+            
+            workspace.WorkspaceFailed += (sender, args) =>
+            {
+                logSink.Log(logSource, LogLevel.Error, args.Diagnostic.Message);
+            };
 
             return await GenerateMocksAsync(
                 logSink,
