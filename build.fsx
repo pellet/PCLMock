@@ -1,4 +1,4 @@
-﻿#I "Src/packages/FAKE/tools"
+#I "Src/packages/FAKE/tools"
 #r "FakeLib.dll"
 
 open Fake
@@ -9,8 +9,8 @@ open Fake.NuGetHelper
 open Fake.Testing.XUnit2
 
 // properties
-let semanticVersion = "5.0.4-alpha"
-let version = (>=>) @"(?<major>\d*)\.(?<minor>\d*)\.(?<build>\d*).*?" "${major}.${minor}.${build}.0" semanticVersion
+let semanticVersion = "5.0.4.1-alpha"
+let version = (>=>) @"(?<major>\d*)\.(?<minor>\d*)\.(?<build>\d*).(?<fork>\d*)" "${major}.${minor}.${build}.${fork}" semanticVersion
 let configuration = getBuildParamOrDefault "configuration" "Release"
 // can be set by passing: -ev deployToNuGet true
 let deployToNuGet = getBuildParamOrDefault "deployToNuGet" "false"
@@ -54,7 +54,7 @@ Target "Build" (fun _ ->
             Attribute.Configuration configuration
             Attribute.Company "Kent Boogaart"
             Attribute.Product "PCLMock"
-            Attribute.Copyright "© Copyright. Kent Boogaart."
+            Attribute.Copyright "� Copyright. Kent Boogaart."
             Attribute.Trademark ""
             Attribute.Culture ""
             Attribute.StringAttribute("NeutralResourcesLanguage", "en-US", "System.Resources")
@@ -174,7 +174,7 @@ Target "CreateNuGetPackages" (fun _ ->
                     "Microsoft.CodeAnalysis.VisualBasic.Workspaces", GetPackageVersion packagesDir "Microsoft.CodeAnalysis.VisualBasic.Workspaces"
                     "Microsoft.CodeAnalysis.Workspaces.Common", GetPackageVersion packagesDir "Microsoft.CodeAnalysis.Workspaces.Common"
                     "Microsoft.Composition", GetPackageVersion packagesDir "Microsoft.Composition"
-                    "Rx-Main", GetPackageVersion packagesDir "Rx-Main"
+                    "System.Reactive", GetPackageVersion packagesDir "System.Reactive"
                     "System.Collections", GetPackageVersion packagesDir "System.Collections"
                     "System.Collections.Immutable", GetPackageVersion packagesDir "System.Collections.Immutable"
                     "System.Diagnostics.Debug", GetPackageVersion packagesDir "System.Diagnostics.Debug"
