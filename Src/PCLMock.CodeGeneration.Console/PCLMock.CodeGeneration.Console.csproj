@@ -3,7 +3,6 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>PCLMockCodeGen</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-
     <TargetFramework>net471</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
