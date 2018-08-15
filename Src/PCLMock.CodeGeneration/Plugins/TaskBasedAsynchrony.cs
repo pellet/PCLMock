@@ -37,9 +37,7 @@ namespace PCLMock.CodeGeneration.Plugins
 
         /// <inheritdoc />
         public Compilation InitializeCompilation(Compilation compilation) =>
-            compilation
-                .AddReferences(
-                    MetadataReference.CreateFromFile(typeof(Task).GetTypeInfo().Assembly.Location));
+            compilation;
 
         /// <inheritdoc />
         public SyntaxNode GetDefaultValueSyntax(
