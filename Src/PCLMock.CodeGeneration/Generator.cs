@@ -41,7 +41,6 @@
             var buildalyzerLogFactory = new BuildalyzerLogFactory(logSink);
             var options = new AnalyzerManagerOptions
             {
-                CleanBeforeCompile = true,
                 LoggerFactory = buildalyzerLogFactory,
                 LoggerVerbosity = LoggerVerbosity.Detailed,
             };
