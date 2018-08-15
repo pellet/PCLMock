@@ -1,6 +1,8 @@
 namespace PCLMock.CodeGeneration.Plugins
 {
     using System;
+    using System.Reflection;
+    using System.Collections.Immutable;
     using Logging;
     using Microsoft.CodeAnalysis;
 
@@ -35,7 +37,9 @@ namespace PCLMock.CodeGeneration.Plugins
 
         /// <inheritdoc />
         public Compilation InitializeCompilation(Compilation compilation) =>
-            compilation;
+            compilation
+                .AddReferences(
+                    MetadataReference.CreateFromFile(typeof(IImmutableList<>).GetTypeInfo().Assembly.Location));
 
         /// <inheritdoc />
         public SyntaxNode GetDefaultValueSyntax(
