@@ -1,15 +1,16 @@
 #I "Src/packages/FAKE/tools"
+open Fake
+open Fake.DotNet
 #r "FakeLib.dll"
 
 open Fake
 open Fake.AssemblyInfoFile
+open Fake.MSBuildHelper
 
 // properties
-let semanticVersion = "5.0.4.2-alpha"
+let semanticVersion = "5.0.4.4-alpha"
 let version = (>=>) @"(?<major>\d*)\.(?<minor>\d*)\.(?<build>\d*).(?<fork>\d*)" "${major}.${minor}.${build}.${fork}" semanticVersion
 let configuration = getBuildParamOrDefault "configuration" "Release"
-// can be set by passing: -ev deployToNuGet true
-let deployToNuGet = getBuildParamOrDefault "deployToNuGet" "false"
 let genDir = "Gen/"
 let docDir = "Doc/"
 let srcDir = "Src/"
@@ -42,16 +43,20 @@ Target "Build" (fun _ ->
             Attribute.StringAttribute("AssemblyInformationalVersion", semanticVersion, "System.Reflection")
         ]
         (AssemblyInfoFileConfig(false))
-      
-    DotNetCli.Build (fun p ->
-    { p with
-        Project = solutionPath
-        Configuration = configuration
-        AdditionalArgs =
-        [
-            "/property:Version=" + semanticVersion
-        ]
-    })
+
+    build (fun p ->
+        { p with
+            Verbosity = Some(Quiet)
+            Targets = ["Build"]
+            Properties =
+                [
+                    "Optimize", "True"
+                    "DebugSymbols", "True"
+                    "Configuration", configuration
+                    "Version", semanticVersion
+                ]
+        })
+        (srcDir @@ "PCLMock.sln")
 )
 
 Target "Test" (fun _ ->
@@ -74,7 +79,6 @@ Target "All"
 // build order. Pass "-ev push true" to build script to push to NuGet
 "Restore"
     ==> "Build"
-    ==> "Test"
     =?> ("Push", getEnvironmentVarAsBool "push")
     ==> "All"
 
