@@ -41,8 +41,7 @@
             var buildalyzerLogFactory = new BuildalyzerLogFactory(logSink);
             var options = new AnalyzerManagerOptions
             {
-                LoggerFactory = buildalyzerLogFactory,
-                LoggerVerbosity = LoggerVerbosity.Detailed,
+                LoggerFactory = buildalyzerLogFactory
             };
             var manager = new AnalyzerManager(initialPath, options);
             var solution = manager.GetWorkspace().CurrentSolution;
