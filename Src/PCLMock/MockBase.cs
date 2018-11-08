@@ -362,9 +362,7 @@ Full mocked object type name: {3}";
 
         private static ContinuationKey GetContinuationKey(LambdaExpression selector)
         {
-            var methodCallExpression = selector.Body as MethodCallExpression;
-
-            if (methodCallExpression != null)
+            if (selector.Body is MethodCallExpression methodCallExpression)
             {
                 if (methodCallExpression.Object == null)
                 {
@@ -379,9 +377,7 @@ Full mocked object type name: {3}";
                 return new ContinuationKey(methodCallExpression.Method);
             }
 
-            var memberExpression = selector.Body as MemberExpression;
-
-            if (memberExpression != null)
+            if (selector.Body is MemberExpression memberExpression)
             {
                 if (memberExpression.Expression.NodeType != ExpressionType.Parameter)
                 {
@@ -389,6 +385,19 @@ Full mocked object type name: {3}";
                 }
 
                 return new ContinuationKey(memberExpression.Member);
+            }
+
+            if (selector.Body is InvocationExpression invocationExpression)
+            {
+                if (invocationExpression.Expression.NodeType != ExpressionType.MemberAccess)
+                {
+                    throw new InvalidOperationException("Specifications against properties cannot be chained: " + invocationExpression);
+                }
+
+                if (invocationExpression.Expression is MemberExpression propertyExpression)
+                {
+                    return new ContinuationKey(propertyExpression.Member);
+                }
             }
 
             throw new InvalidOperationException("Unable to determine the details of the member being mocked.");
