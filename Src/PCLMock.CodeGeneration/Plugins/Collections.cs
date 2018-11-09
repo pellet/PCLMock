@@ -1,6 +1,8 @@
 namespace PCLMock.CodeGeneration.Plugins
 {
     using System;
+    using System.Reflection;
+    using System.Collections.Immutable;
     using Logging;
     using Microsoft.CodeAnalysis;
 

@@ -2,7 +2,9 @@ namespace PCLMock.CodeGeneration.Plugins
 {
     using System;
     using System.Linq;
+    using System.Reactive;
     using System.Reactive.Linq;
+    using System.Reflection;
     using Logging;
     using Microsoft.CodeAnalysis;
 
@@ -41,7 +43,7 @@ namespace PCLMock.CodeGeneration.Plugins
 
         /// <inheritdoc />
         public Compilation InitializeCompilation(Compilation compilation) =>
-            compilation.AddReferences(MetadataReference.CreateFromFile(typeof(Observable).Assembly.Location));
+            compilation;
 
         /// <inheritdoc />
         public SyntaxNode GetDefaultValueSyntax(

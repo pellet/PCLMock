@@ -2,6 +2,8 @@ namespace PCLMock.CodeGeneration.Plugins
 {
     using System;
     using System.Linq;
+    using System.Reflection;
+    using System.Threading.Tasks;
     using Logging;
     using Microsoft.CodeAnalysis;
 
